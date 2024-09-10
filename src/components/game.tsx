@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Timer, RotateCcw, RefreshCw, Trophy } from 'lucide-react'
@@ -51,7 +51,7 @@ const winningLines = [
   [0, 3, 6], [1, 4, 7], [2, 5, 8], // verticals
 ];
 
-export default function  Game() {
+export default function Page() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -143,6 +143,20 @@ export default function  Game() {
 
   const resetGame = () => {
     router.push('/');
+    // setGameStates([{
+    //   pieces: initialPieces,
+    //   currentPlayer: 'player1',
+    //   winner: null,
+    //   player1Moves: 0,
+    //   player2Moves: 0,
+    //   player1Name,
+    //   player2Name,
+    //   player1Color,
+    //   player2Color
+    // }]);
+    // setCurrentStateIndex(0);
+    // setSelectedPiece(null);
+    // setTimer(0);
   };
 
   const undoMove = () => {
@@ -208,20 +222,55 @@ export default function  Game() {
                   top: `${Math.floor(position / 3) * 50}%`,
                 }}
                 onClick={() => handlePositionClick(position as Position)}
-              />
+              >
+                {currentState.pieces.map((piece, index) =>
+                  piece.position === position ? (
+                    <div
+                      key={index}
+                      className={`w-full h-full rounded-full ${
+                        selectedPiece === piece ? 'ring-2 ring-yellow-400' : ''
+                      } ${
+                        currentState.currentPlayer !== piece.player ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+                      }`}
+                      style={{
+                        backgroundColor: piece.player === 'player1' ? player1Color : player2Color
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePieceClick(piece);
+                      }}
+                    />
+                  ) : null
+                )}
+              </div>
             ))}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              <line x1="0%" y1="0%" x2="100%" y2="100%" stroke="black" />
+              <line x1="100%" y1="0%" x2="0%" y2="100%" stroke="black" />
+              <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="black" />
+              <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="black" />
+            </svg>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button onClick={undoMove}>
-            <RotateCcw className="w-4 h-4 mr-2" /> Undo
+        <CardFooter className="flex flex-col items-center space-y-4">
+          <div className="flex items-center space-x-2">
+            <Timer className="w-5 h-5" />
+            <span>{formatTime(timer)}</span>
+          </div>
+          <div className="flex space-x-2">
+            <Button onClick={undoMove} disabled={currentStateIndex === 0}>
+              <RotateCcw className="w-4 h-4" />
+            </Button>
+            <Button onClick={resetGame} variant="outline">
+            <RefreshCw className="w-4 h-4 mr-2" /> Reiniciar
           </Button>
-          <Button onClick={redoMove}>
-            <RefreshCw className="w-4 h-4 mr-2" /> Redo
-          </Button>
+            <Button onClick={redoMove} disabled={currentStateIndex === gameStates.length - 1}>
+             <RotateCcw className="w-4 h-4 transform rotate-180" />
+            </Button>
+          </div>
+          
         </CardFooter>
       </Card>
     </div>
   );
 }
-
