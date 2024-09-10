@@ -47,9 +47,11 @@ const adjacentPositions: Record<Position, Position[]> = {
 };
 
 const winningLines = [
-  [0, 1, 2], [3, 4, 5], [6, 7, 8], // horizontals
-  [0, 3, 6], [1, 4, 7], [2, 5, 8], // verticals
-];
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // horizontais
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // verticais
+    [0, 4, 8], [2, 4, 6]             // diagonais
+  ];
+  
 
 export default function Page() {
   const searchParams = useSearchParams();
