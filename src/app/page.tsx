@@ -33,7 +33,7 @@ export default function Page() {
         player2Name: player2.name,
         player2Color: player2.color,
       }).toString();
-      router.push(`/game?${queryParams}`);
+      router.push(`/play?${queryParams}`);
     }
   };
 
