@@ -1,6 +1,8 @@
 # Tira 💩 do meio
 
-Versão digital do jogo clássico angolano: TIRA COCO DO MEIO!
+Versão digital do jogo clássico angolano: TIRA COCÔ DO MEIO!
+
+https://github.com/user-attachments/assets/48083ecd-6ea2-4663-81f2-ec40233f7cf7
 
 Jogue agora mesmo: [Começar](https://tira-coco-do-meio.vercel.app/)!
 
