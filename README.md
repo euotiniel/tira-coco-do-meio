@@ -22,4 +22,4 @@ Tira 💩 do Meio é um jogo de tabuleiro clássico de Angola, semelhante ao Shi
 
 ## Licença
 
-Este projeto é distribuído sob a licença [MIT](). 
+Este projeto é distribuído sob a licença [MIT](https://github.com/euotiniel/tira-coco-do-meio?tab=MIT-1-ov-file). 
