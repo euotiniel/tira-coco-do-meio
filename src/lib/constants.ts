@@ -1,0 +1,1 @@
+export const WEBSITE_HOST_URL = 'https://tira-coco-do-meio.vercel.app/'

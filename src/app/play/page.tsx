@@ -1,5 +1,4 @@
 "use client"
-
 import { Suspense } from "react";
 import Game from "@/components/game"
 
